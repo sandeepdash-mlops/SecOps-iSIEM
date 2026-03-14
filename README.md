@@ -116,4 +116,4 @@ If you found this project helpful or have any questions, feel free to reach out!
 
 ---
 
-This README provides a structured walkthrough on how to modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent as part of the customized SIEM platform.
+This README provides a structured walkthrough on how to develop inhouse siem solution in a customized way and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent as part of the customized SIEM platform.
