@@ -1,2 +1,78 @@
-# SecOps-iSIEM
-A security solution providing Endpoint Security, Threat Intelligence, Security Operations, Cloud Security, and unified XDR/SIEM protection for endpoints and cloud workloads.
+# ISIEM Containers for Docker
+
+![Docker](https://img.shields.io/badge/docker-supported-blue)
+![Platform](https://img.shields.io/badge/platform-kubernetes-informational)
+![License](https://img.shields.io/badge/license-open--source-green)
+
+Slack • Email
+
+---
+
+## Description
+
+The `isiem/isiem-docker` repository provides resources to deploy the **ISIEM cybersecurity platform** using Docker containers.
+
+This setup enables easy installation and orchestration of the full **ISIEM stack**, including:
+
+* **ISIEM Manager**
+* **ISIEM Dashboard** (based on OpenSearch Dashboards)
+* **OpenSearch Indexer** for indexing and search
+
+These container images are **customized and built locally** by modifying the original Wazuh Docker images.
+
+---
+
+## Architecture
+
+```
++--------------------+
+|  ISIEM Dashboard   |
+| (Web Interface)    |
++---------+----------+
+          |
+          v
++--------------------+
+|  ISIEM Indexer     |
+|   (OpenSearch)     |
++---------+----------+
+          |
+          v
++--------------------+
+|  ISIEM Manager     |
+| Event Processing   |
++--------------------+
+```
+
+---
+
+## Capabilities
+
+* Full deployment of the **ISIEM stack** using Docker
+* **Docker Compose** support for orchestration
+* **Scalable architecture** with multi-node support
+* **Persistent data storage** through configurable volumes
+* **Ready-to-use configurations** for production or testing environments
+
+---
+
+## Quick Start
+
+Build the customized images locally:
+
+```bash
+docker build -t isiem/manager ./manager
+docker build -t isiem/indexer ./indexer
+docker build -t isiem/dashboard ./dashboard
+```
+
+Run the stack using Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+---
+
+## Deployment
+
+This project is primarily designed for **Kubernetes environments**, but Docker Compose can be used for **local testing and development**.
