@@ -124,8 +124,6 @@ This image repository works hand-in-hand with the main deployment repository:
 
 If you found this project helpful or have any questions, feel free to reach out!
 
-📱 **Phone:** (+91) 7008-62-6663
-
 📧 **Email:** sandeepdashmlops@gmail.com
 
 💻 **GitHub:** [github.com/sandeepdash-mlops](https://github.com/sandeepdash-mlops)
