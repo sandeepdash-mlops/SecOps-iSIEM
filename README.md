@@ -55,9 +55,32 @@ These container images are **customized and built locally** by modifying the ori
 
 ---
 
+## Prerequisites
+
+Before getting started, ensure the following tools are installed on your system:
+
+* Docker
+* Docker Compose
+* Linux environment (recommended for container builds)
+
+---
+
 ## Quick Start
 
-Build the customized images locally:
+### Build the customized images locally
+
+Navigate to the build directory:
+
+```bash
+cd isiem-docker/isiem-build-docker-images
+
+Run the build script:
+
+./build-images.sh
+
+This process builds Docker images for all ISIEM components on your local system.
+
+Alternatively, you can build individual images manually:
 
 ```bash
 docker build -t isiem/manager ./manager
