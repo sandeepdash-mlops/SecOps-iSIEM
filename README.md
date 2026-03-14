@@ -73,10 +73,13 @@ Navigate to the build directory:
 
 ```bash
 cd isiem-docker/isiem-build-docker-images
+```
 
 Run the build script:
 
+```bash
 ./build-images.sh
+```
 
 This process builds Docker images for all ISIEM components on your local system.
 
