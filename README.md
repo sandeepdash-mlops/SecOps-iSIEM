@@ -76,3 +76,18 @@ docker compose up -d
 ## Deployment
 
 This project is primarily designed for **Kubernetes environments**, but Docker Compose can be used for **local testing and development**.
+
+
+## 💬 Connect
+If you found this project helpful or have any questions, feel free to reach out!
+
+
+📱 Phone: (+91) 7008-62-6663
+
+📧 Email: sandeepdashmlops@gmail.com
+
+💻 GitHub: https://github.com/sandeepdash-mlops
+
+---
+
+This README provides a structured walkthrough on how to modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent as part of the customized SIEM platform.
