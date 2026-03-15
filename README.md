@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a2332,100:2496ED&height=200&section=header&text=i-SIEM%20Containers&fontSize=70&fontColor=ffffff&fontAlignY=38&desc=Custom%20Docker%20Images%20for%20the%20i-SIEM%20Platform&descAlignY=58&descSize=20&descColor=90caf9" alt="i-SIEM Docker Banner"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a2332,100:2496ED&height=200&section=header&text=i-SIEM%20Containers&fontSize=70&fontColor=ffffff&fontAlignY=38&desc=Custom%20Docker%20Images%20for%20the%20i-SIEM%20Platform&descAlignY=64&descSize=20&descColor=90caf9" alt="i-SIEM Docker Banner"/>
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
