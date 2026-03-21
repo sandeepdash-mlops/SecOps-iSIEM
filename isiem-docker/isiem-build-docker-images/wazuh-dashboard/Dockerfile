@@ -36,6 +36,45 @@ RUN sed -i "s/'wazuh-alerts-'/'isiem-alerts-'/g; \
     sed -i 's/wazuh-alerts/isiem-alerts/g; s/wazuh-monitoring/isiem-monitoring/g; s/wazuh-states-/isiem-states-/g; s/wazuh-statistics-/isiem-statistics-/g' \
       /usr/share/wazuh-dashboard/plugins/wazuh/target/public/wazuh.plugin.js
 
+# Fix sample-data dataset files to prevent wazuh-states-* index patterns from being recreated
+RUN sed -i 's/wazuh-states-/isiem-states-/g; s/wazuh-alerts/isiem-alerts/g; s/wazuh-archives/isiem-archives/g; s/wazuh-monitoring/isiem-monitoring/g; s/wazuh-statistics/isiem-statistics/g' \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-hardware/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-hardware/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-system/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-system/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-vulnerabilities/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-vulnerabilities/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-groups/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-groups/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-packages/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-packages/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-ports/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-ports/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-processes/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-processes/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-users/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-users/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-networks/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-networks/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-interfaces/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-interfaces/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-protocols/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-protocols/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-services/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-services/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-hotfixes/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-hotfixes/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-browser-extensions/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-inventory-browser-extensions/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-fim-files/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-fim-files/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-fim-registries/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/states-fim-registries/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/wazuh-alerts/template.json \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/wazuh-alerts/main.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/dataset/shared-utils.js \
+      /usr/share/wazuh-dashboard/plugins/wazuh/server/lib/sample-data/index.js
+
 # Create and set permissions to data directories
 RUN mkdir -p $INSTALL_DIR/data/wazuh && chmod -R 775 $INSTALL_DIR/data/wazuh
 RUN mkdir -p $INSTALL_DIR/data/wazuh/config && chmod -R 775 $INSTALL_DIR/data/wazuh/config
@@ -58,13 +97,11 @@ RUN bash config.sh
 ################################################################################
 FROM amazonlinux:2023
 
-# Set environment variables
 ENV USER="wazuh-dashboard" \
     GROUP="wazuh-dashboard" \
     NAME="wazuh-dashboard" \
     INSTALL_DIR="/usr/share/wazuh-dashboard"
 
-# Set Wazuh app variables
 ENV PATTERN="" \
     CHECKS_PATTERN="" \
     CHECKS_TEMPLATE="" \
@@ -79,10 +116,8 @@ ENV PATTERN="" \
     WAZUH_MONITORING_SHARDS="" \
     WAZUH_MONITORING_REPLICAS=""
 
-# Update and install dependencies
 RUN yum install shadow-utils -y
 
-# Create wazuh-dashboard user and group
 RUN getent group $GROUP || groupadd -r -g 1000 $GROUP
 RUN useradd --system \
             --uid 1000 \
@@ -93,25 +128,20 @@ RUN useradd --system \
             --comment "$USER user" \
             $USER
 
-# Copy and set permissions to scripts
 COPY config/entrypoint.sh /
 COPY config/wazuh_app_config.sh /
 RUN chmod 700 /entrypoint.sh
 RUN chmod 700 /wazuh_app_config.sh
 RUN chown 1000:1000 /*.sh
 
-# Copy Install dir from builder to current image
 COPY --from=builder --chown=1000:1000 $INSTALL_DIR $INSTALL_DIR
 
-# Create custom directory
 RUN mkdir -p /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
 RUN chown 1000:1000 /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
 
-# Set workdir and user
 WORKDIR $INSTALL_DIR
 USER wazuh-dashboard
 
-# Services ports
 EXPOSE 443
 
 ENTRYPOINT [ "/entrypoint.sh" ]
